@@ -1,0 +1,4 @@
+[18-Sep-2018 16:30:51 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 76 bytes) in /home/govc1604/public_html/system/database/drivers/mysqli/mysqli_result.php on line 183
+[18-Sep-2018 16:31:06 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 76 bytes) in /home/govc1604/public_html/system/database/drivers/mysqli/mysqli_result.php on line 183
+[23-Sep-2018 15:51:33 Asia/Jakarta] PHP Notice:  Undefined index: HTTPS_HOST in /home/govc1604/public_html/application/config/config.php on line 26
+[22-May-2019 12:45:39 Asia/Jakarta] PHP Fatal error:  Call to a member function get_all() on null in /home/govc1604/public_html/application/controllers/Product_category.php on line 254
