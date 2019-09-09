@@ -43,6 +43,9 @@ class Request_inspection extends CI_Controller {
 
 
     public function api() {
+
+
+        
         $request_inspection = $this->Request_inspection_model->get_all();
         $product_category   = $this->Product_category_model->get_all();  
         $end_user           = $this->End_user_model->get_all();  
@@ -136,6 +139,10 @@ class Request_inspection extends CI_Controller {
 
     public function api_save_request_inspection()
     {
+
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
         $uid                    = 1;
         $end_user_id            = $this->input->post('end_user_id');
         $inspector_id           = $this->input->post('inspector_id');

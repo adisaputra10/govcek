@@ -149,7 +149,9 @@ class Master_product extends CI_Controller {
 
     public function api_create_action() {
         
-
+              header('Content-type: application/json');
+              header("Access-Control-Allow-Origin: *");
+              header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
        
             $data = array(
                 'serial_number' => $this->input->post('serial_number', TRUE),
