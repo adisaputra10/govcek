@@ -41,6 +41,32 @@ class Request_inspection_model extends CI_Model {
         return $result;
     }
 
+    function api_get_all() {
+        /*$this->db->order_by($this->id, $this->order);
+        return $this->db->get_where($this->table, array('uid' => $this->session->userdata('user_id')))->result();*/
+        $uid = $this->session->userdata('user_id');        
+        $kueri = " 
+            SELECT 
+                r.*,i.inspector_name,e.company,p.product_category,st.status_name,
+                mst.category_id as mst_cat_id, mst.product_category_id as procat_id, mst.end_user_id as mst_end_user_id,
+                cat.category as category_name
+            FROM 
+                request_inspection r
+                LEFT JOIN end_user e ON r.end_user_id = e.id
+                LEFT JOIN product_category p ON r.product_category_id = p.id                
+                LEFT JOIN status st ON r.status_id = st.id
+                LEFT JOIN inspector i ON r.inspector_id = i.id
+                LEFT JOIN mst_product mst ON r.equipment_id = mst.id
+                LEFT JOIN category cat ON mst.category_id = cat.id
+          ";
+        
+        //echo $kueri; die();
+
+        $result = $this->db->query($kueri)->result();
+
+        return $result;
+    }
+
     function get_all_by_id($id) {
         /*$this->db->order_by($this->id, $this->order);
         return $this->db->get_where($this->table, array('uid' => $this->session->userdata('user_id')))->result();*/
