@@ -43,6 +43,8 @@ class Master_product_model extends CI_Model {
                     GROUP BY m.id 
                     ORDER BY m.id ASC";        
 
+                    //var_dump($kueri);
+                    //die();
         $result = $this->db->query($kueri)->result();
 
         return $result;

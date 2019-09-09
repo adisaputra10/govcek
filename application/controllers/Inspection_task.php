@@ -47,12 +47,17 @@ class Inspection_task extends CI_Controller {
         }
     }
 
+
+
+
+
     public function create_header() 
     {
         $parent_id  = $this->uri->segment(3);
         $serv_date  = base64_decode($this->uri->segment(4));  
         //$exp_date   = base64_decode($this->uri->segment(5));  
         $procat_id  = $this->uri->segment(5);
+        //print_r($parent_id);
         
         $mst_product = $this->Master_product_model->get_by_category_id($procat_id);        
         $name_inspection = $this->Product_category_checklist_model->get_by_id($procat_id);
@@ -153,6 +158,117 @@ class Inspection_task extends CI_Controller {
 
         //echo '<pre>';print_r($begin_inspection);die();
         $this->template->display('inspection_task/tb_inspection_detail_form', $data);
+        
+        
+    }
+    public function api_create_header() 
+    {
+        $parent_id  = $this->uri->segment(3);
+        $serv_date  = base64_decode($this->uri->segment(4));  
+        //$exp_date   = base64_decode($this->uri->segment(5));  
+        $procat_id  = $this->uri->segment(5);
+        //print_r($parent_id);
+        
+        $mst_product = $this->Master_product_model->get_by_category_id($procat_id);        
+        $name_inspection = $this->Product_category_checklist_model->get_by_id($procat_id);
+        $status = $this->Status_model->get_all(); 
+
+        // ambil nilai expire_date, untuk generate inspection detail
+        $exp_date = $mst_product[0]->expire_date;
+        $new_inspection = false; 
+        //echo $exp_date.'/';
+        if(empty($exp_date) || is_null($exp_date) || $exp_date == '' || $exp_date == 0){
+            $new_inspection = true; 
+        }
+        
+        //echo '<pre>';print_r($name_inspection);die();
+        
+        $n=0; $cn = '';
+        if($name_inspection){            
+            foreach ($name_inspection as $r){ 
+                $cn .= $r->checklist_name.'|N|';
+            }
+            //print_r($cn);die();
+            $cn = substr($cn,0,-1);
+            $temp = explode('|',$cn); $i = 0; $n = count($temp); $header='';                
+            $header_col = array(); $value_col = array();
+            while($i < $n){                            
+                $header_col[] = $temp[$i];                
+                $i=$i+2;
+            }  
+
+        }
+
+        //cek, apakah checklist name sudah didefinisikan ke product
+        if ($cn == ''){
+            $this->session->set_flashdata('checklist', 'Cheklist must be define first in your product. Go to Product Category -> Add Checklist');
+            redirect(site_url('master_product'));
+        }
+        
+        $data = array(
+            'parent_id'         => $parent_id,            
+            'checklist_name'    => $cn,
+        );
+
+        //cek jika begin_inspection masih ada yg empty inspection_date
+        $inspection_data = $this->Begin_inspection_model->cek_data_complete($parent_id);
+        //echo $inspection_data->id.'/'.$inspection_data->service_date.'<br>';
+        //echo '<pre>';print_r($inspection_data);die();
+
+        if(count($inspection_data) > 0 and $new_inspection){ 
+            $this->session->set_flashdata('message', 'Please fill EXPIRE DATE on Master Product to generate new inspection detail');            
+        }else{             
+            if($inspection_data){
+                if(empty($inspection_data->service_date) || !$inspection_data->service_date = 0 || !$inspection_data->service_date == '' || !is_null($inspection_data->service_date)){
+                    
+                }else{ 
+                    $this->Begin_inspection_model->insert($data);
+                }
+            }else{
+                $this->Begin_inspection_model->insert($data);
+            }
+        }
+        
+        $inspector = $this->Inspector_model->get_all();
+        $location = $this->Location_model->get_all();
+        $product_category = $this->Product_category_model->get_all();                  
+        $category = $this->Category_model->get_all();                              
+        $begin_inspection = $this->Begin_inspection_model->get_detail_inspection($parent_id);
+        //echo '<pre>';print_r($begin_inspection);die();
+
+        $data = array(
+                'button' => 'Update',
+                'action' => site_url('inspection_task/create_action_inspection'),
+                'id' => set_value('id', $parent_id),
+                //'category_id' => set_value('category_id', $row->category_id),
+                'product_id' => set_value('product_id', $procat_id),     
+                'comment' => set_value('comment'),   
+                'status' => set_value('status'),        
+            );
+
+        $data['product_category'] = $product_category;
+        $data['category'] = $category;
+        $data['inspector'] = $inspector;
+        $data['location'] = $location;
+        $data['product'] = $mst_product;
+        $data['begin_inspection'] = $begin_inspection;
+        $data['status'] = $status;
+        $data['category_name'] = $mst_product[0]->category;
+        $data['product_name'] =  $mst_product[0]->product_category;
+
+        if($n > 0){
+            $data['header_col'] = $header_col;
+            $data['value_col'] = $value_col;
+        }else{
+            $data['header_col'] = '';
+            $data['value_col'] = '';
+        }
+
+        $data['message'] = '';
+
+        //echo '<pre>';print_r($begin_inspection);die();
+        //$this->template->display('inspection_task/tb_inspection_detail_form', $data);
+        echo json_encode(array('status' => true,'data' => $begin_inspection ));
         
         
     }
@@ -265,6 +381,15 @@ class Inspection_task extends CI_Controller {
         } 
         $checklist_name = substr($checklist_name,0,strlen($checklist_name)-1);        
 
+          $status=$this->input->post('status_inspection', TRUE);
+
+        $kuery= $this->db->query("select * from hp_status where id='$status'");
+        $status_begin='';
+        foreach ($kuery->result() as $row)
+            {
+                    $status_begin=$row->status_name;
+            }
+   
         $data = array(                
             //'id' => $this->input->post('detail_id', TRUE),
             //'parent_id' => $this->input->post('parent_id', TRUE),
@@ -273,7 +398,7 @@ class Inspection_task extends CI_Controller {
             'checklist_name' => $checklist_name,
             'service_date' => $service_date,
             'comment' => $this->input->post('comment', TRUE),
-            'status' => $this->input->post('status_inspection', TRUE),
+            'status' => $status_begin,
             'uid' => $this->session->userdata('user_id'),
         );
 
@@ -285,8 +410,13 @@ class Inspection_task extends CI_Controller {
         // UPDATE EXPIRE DATE
         $nilai_interval = $this->Master_product_model->get_new_expire_date($parent_id,$service_date);
         //echo '<pre>';print_r($nilai_interval);die();
+        $status=$this->input->post('status_inspection', TRUE);
 
-        $this->Begin_inspection_model->update($id, $data);
+        $this->db->query("update mst_product set status='$status' where id='$parent_id'");
+       
+
+       $this->Begin_inspection_model->update($id, $data);
+
         $this->session->set_flashdata('message', 'Update inspection record success');
         redirect(site_url('master_product'));
     }
@@ -367,6 +497,7 @@ class Inspection_task extends CI_Controller {
             );
             
         //echo '<pre>'; print_r($data); die();
+        //   $data = $this->db->query("SELECT * FROM tenant where id_tenant='$id'");
         $this->Begin_inspection_model->insert($data);
         $this->session->set_flashdata('message', 'Create Record Success');
         redirect(site_url('inspection_task/add_inspection/'.$parent_id));

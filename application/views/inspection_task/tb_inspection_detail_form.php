@@ -57,7 +57,7 @@
                                     <td>$no</td>
                                     <td>".$r->service_date."</td>
                                     <td>".$r->location_name."</td>
-                                    <td>".$r->inspector_name."</td>";                                                                
+                                    <td>".$r->inspector_name."  </td>";                                                                
                                 $temp  = explode('|',$r->checklist_name); 
                                 $i = 1; $realCol=1; $n = count($temp); //die('jum;ah: '.$n);
                                 $value_col = array();                                
@@ -179,7 +179,7 @@
                                         <?php                                        
                                         if (!empty($status)) {
                                             foreach ($status as $row) {
-                                                echo "<option value='$row->status_name'>" . $row->status_name. "</option>";                                                
+                                                echo "<option value='$row->id'>" . $row->status_name. "</option>";                                                
                                             }
                                         }
                                         ?>

@@ -40,6 +40,15 @@ class Master_product extends CI_Controller {
         $this->template->display('master_product/tb_master_product_list', $data);
     }
 
+
+    public function api() {
+        $master_product = $this->Master_product_model->get_all();                            
+        echo json_encode(array('status' => true,'data' => $master_product ));
+
+
+    }
+
+
     public function read($id) {
         $row = $this->Master_product_model->get_by_id($id);
         if ($row) {
@@ -133,6 +142,51 @@ class Master_product extends CI_Controller {
             }
             redirect(site_url('master_product'));
         }
+    }
+
+
+
+
+    public function api_create_action() {
+        
+
+       
+            $data = array(
+                'serial_number' => $this->input->post('serial_number', TRUE),
+                'asset_number' => $this->input->post('asset_number', TRUE),
+                'service_date' => $this->input->post('service_date', TRUE),
+                'expire_date' => $this->input->post('expire_date', TRUE),
+                'category_id' => $this->input->post('category_id', TRUE),
+                'product_category_id' => $this->input->post('product_category_id', TRUE),
+                'end_user_id' => $this->input->post('end_user_id', TRUE),
+                'manufacture_id' => $this->input->post('manufacture_id', TRUE),
+                'unit_system_id' => $this->input->post('unit_system_id', TRUE),
+                'inspection_schedule_id' => $this->input->post('inspection_schedule_id', TRUE),
+                'quick_check_no' => $this->input->post('quick_check_no', TRUE),
+                'capacity' => $this->input->post('capacity', TRUE),
+                'status' => $this->input->post('status_id', TRUE),
+                'uid' => $this->session->userdata('user_id'),
+            );
+            
+            // cek duplikasi di master product
+            $cekDuplikasi = $this->Master_product_model->cek_duplikasi($this->input->post('category_id'),$this->input->post('serial_number'));
+
+            //echo count($cekDuplikasi);
+            //echo '<pre>'; print_r($data); die();
+
+            if(count($cekDuplikasi) > 0){
+                //$this->session->set_flashdata('message', 'Create failed, duplicated.');             
+                //redirect(site_url('master_product/create'));
+                echo json_encode(array('status' => true,'data' => 'failed,duplicated ' ));
+
+            }else{  
+                $this->Master_product_model->insert($data);
+              
+                echo json_encode(array('status' => true,'data' => 'success' ));
+            }
+
+           
+        
     }
 
     public function update($id) {

@@ -40,6 +40,27 @@ class Request_inspection extends CI_Controller {
         $this->template->display('request_inspection/tb_request_inspection_list', $data);
     }
 
+
+
+    public function api() {
+        $request_inspection = $this->Request_inspection_model->get_all();
+        $product_category   = $this->Product_category_model->get_all();  
+        $end_user           = $this->End_user_model->get_all();  
+        $inspector          = $this->Inspector_model->get_all();
+        $status             = $this->Status_model->get_all();
+        //echo '<pre>';print_r($request_inspection);die();
+
+        $data = array(
+            'product_category_data' => $product_category,
+            'request_inspection'    => $request_inspection,
+            'end_user'              => $end_user,
+            'inspector'             => $inspector,
+        );
+        $data['message'] = '';
+        //$this->template->display('request_inspection/tb_request_inspection_list', $data);
+        echo json_encode(array('status' => true,'data' => $request_inspection ));
+
+    }
     public function add_request()
     {        
         $request_inspection = $this->Request_inspection_model->get_all();
@@ -109,6 +130,43 @@ class Request_inspection extends CI_Controller {
         $this->Request_inspection_model->insert($data);
         $this->session->set_flashdata('success', 'Create Request Inspection Success');
         redirect(site_url('request_inspection'));
+
+    }
+
+
+    public function api_save_request_inspection()
+    {
+        $uid                    = $this->session->userdata('user_id');
+        $end_user_id            = $this->input->post('end_user_id');
+        $inspector_id           = $this->input->post('inspector_id');
+        $product_category_id    = $this->input->post('product_category_id');
+        $schedule_date          = $this->input->post('schedule_date');
+        $inspection_date        = $this->input->post('inspection_date');
+        $rep_no                 = $this->input->post('rep_no');
+        $status_id              = $this->input->post('status_id');
+        $remark                 = $this->input->post('remark');        
+        $invoice_no             = $this->input->post('invoice_no');
+        $equipment_id           = $this->input->post('equipment_id');
+
+        $data = array(
+            'uid'           => $uid,
+            'end_user_id'   => $end_user_id,
+            'inspector_id'  => $inspector_id,
+            'product_category_id'   => $product_category_id,
+            'schedule_date' => $schedule_date,
+            'inspection_date' => $inspection_date,
+            'rep_no'        => $rep_no,
+            'status_id'     => $status_id,
+            'remark'        => $remark,
+            'invoice_no'    => $invoice_no,
+            'equipment_id'  => $equipment_id,
+        );
+        //fecho '<pre>';print_r($data); die('simpan');
+
+        $this->Request_inspection_model->insert($data);
+        //$this->session->set_flashdata('success', 'Create Request Inspection Success');
+        //redirect(site_url('request_inspection'));
+        echo json_encode(array('status' => true,'data' => 'success' ));
 
     }
 
