@@ -30,6 +30,8 @@ class Master_api extends CI_Controller {
 
 
     public function master_product() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
         $master_product = $this->Master_product_model->api_get_all();                            
         echo json_encode(array('status' => true,'data' => $master_product ));
 
@@ -38,10 +40,10 @@ class Master_api extends CI_Controller {
 
 
     public function request_inspection() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
         $request_inspection = $this->Request_inspection_model->api_get_all();
-      
         echo json_encode(array('status' => true,'data' => $request_inspection ));
-
 
     }
 

@@ -42,6 +42,8 @@ class Master_product_api extends CI_Controller {
 
 
     public function api() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
         $master_product = $this->Master_product_model->api_get_all();                            
         echo json_encode(array('status' => true,'data' => $master_product ));
 
