@@ -136,7 +136,7 @@ class Request_inspection extends CI_Controller {
 
     public function api_save_request_inspection()
     {
-        $uid                    = $this->session->userdata('user_id');
+        $uid                    = 1;
         $end_user_id            = $this->input->post('end_user_id');
         $inspector_id           = $this->input->post('inspector_id');
         $product_category_id    = $this->input->post('product_category_id');

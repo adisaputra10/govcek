@@ -1,0 +1,43 @@
+GET
+http://dev.govcek.com/index.php/request_inspection/api
+http://dev.govcek.com/index.php/master_product/api
+http://dev.govcek.com/index.php/inspection_task/api_create_header/13/MTk4OC0xMS0wMQ==/10
+
+
+POST
+http://dev.govcek.com/index.php/master_product/api_create_action
+ $data = array(
+                'serial_number' => $this->input->post('serial_number', TRUE),
+                'asset_number' => $this->input->post('asset_number', TRUE),
+                'service_date' => $this->input->post('service_date', TRUE),
+                'expire_date' => $this->input->post('expire_date', TRUE),
+                'category_id' => $this->input->post('category_id', TRUE),
+                'product_category_id' => $this->input->post('product_category_id', TRUE),
+                'end_user_id' => $this->input->post('end_user_id', TRUE),
+                'manufacture_id' => $this->input->post('manufacture_id', TRUE),
+                'unit_system_id' => $this->input->post('unit_system_id', TRUE),
+                'inspection_schedule_id' => $this->input->post('inspection_schedule_id', TRUE),
+                'quick_check_no' => $this->input->post('quick_check_no', TRUE),
+                'capacity' => $this->input->post('capacity', TRUE),
+                'status' => $this->input->post('status_id', TRUE),
+     
+            );
+            
+
+POST
+http://dev.govcek.com/index.php/request_inspection/api_save_request_inspection
+   $uid                    = 1;
+        $end_user_id            = $this->input->post('end_user_id');
+        $inspector_id           = $this->input->post('inspector_id');
+        $product_category_id    = $this->input->post('product_category_id');
+        $schedule_date          = $this->input->post('schedule_date');
+        $inspection_date        = $this->input->post('inspection_date');
+        $rep_no                 = $this->input->post('rep_no');
+        $status_id              = $this->input->post('status_id');
+        $remark                 = $this->input->post('remark');        
+        $invoice_no             = $this->input->post('invoice_no');
+        $equipment_id           = $this->input->post('equipment_id');
+
+
+ 
+
