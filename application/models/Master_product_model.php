@@ -49,6 +49,38 @@ class Master_product_model extends CI_Model {
 
         return $result;
     }
+
+    function api_get_all() 
+    {
+        //$this->db->order_by($this->id, $this->order);
+        //return $this->db->get_where($this->table, array('uid' => $this->session->userdata('user_id')))->result();        
+
+             
+        //echo '--> '.$this->session->userdata('user_major').'/'.$this->session->userdata('user_uid');die();
+        
+        $kueri = "             
+                SELECT 
+                    m.*, pc.product_category, cat.category, u.description as unit_system, s.schedule, e.company as end_user, man.manufacture_name, 
+                    max(b.service_date) as last_inspection, st.status_name
+                FROM 
+                    mst_product m
+                    LEFT JOIN product_category pc ON m.product_category_id = pc.id
+                    LEFT JOIN category cat ON m.category_id = cat.id
+                    LEFT JOIN hp_unit u ON m.unit_system_id = u.id
+                    LEFT JOIN hp_schedule s ON m.inspection_schedule_id = s.id
+                    LEFT JOIN end_user e ON m.end_user_id = e.id
+                    LEFT JOIN manufacture man ON m.manufacture_id = man.id
+                    LEFT JOIN begin_inspection b ON m.id = b.parent_id 
+                    LEFT JOIN hp_status st ON m.status = st.id               
+                    GROUP BY m.id 
+                    ORDER BY m.id ASC";        
+
+                    //var_dump($kueri);
+                    //die();
+        $result = $this->db->query($kueri)->result();
+
+        return $result;
+    }
     
     function get_customer($cid, $cat, $eq){
         $uid = $this->session->userdata('user_id');        
