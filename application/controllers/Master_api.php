@@ -49,6 +49,20 @@ class Master_api extends CI_Controller {
 
     }
 
+    public function inspector_name() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+        $data = $this->db->query("SELECT * FROM inspector ");
+        echo json_encode(array('status' => true,'data' => $data->result_array() ));
+
+    }
+
+
+
+
+
+
 
     public function read($id) {
         $row = $this->Master_product_model->get_by_id($id);
