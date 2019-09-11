@@ -40,6 +40,9 @@ class Master_api extends CI_Controller {
     }
 
 
+
+
+
     public function request_inspection() {
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
@@ -57,6 +60,38 @@ class Master_api extends CI_Controller {
         echo json_encode(array('status' => true,'data' => $data->result_array() ));
 
     }
+
+
+    public function login()
+	{
+		
+		
+		header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+
+         $method = $_SERVER['REQUEST_METHOD'];
+		 if($method != 'POST'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		 } else {
+
+			$username=$this->input->post('username');
+			$password=$this->input->post('password');
+
+
+			$data = $this->db->query("SELECT * FROM tb_users where username='$username' ");
+			//$data->row();
+			if($data->num_rows() > 0){
+                echo json_encode(array('status' => true,'data' => $data->result_array() ));
+			}else{
+				echo json_encode("failed");
+			}
+			
+		 }
+		
+
+	}
 
 
 
