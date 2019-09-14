@@ -103,6 +103,28 @@ class Master_product extends CI_Controller {
         $this->template->display('master_product/tb_master_product_form', $data);
     }
 
+
+    
+
+    public function form_excel() {
+       
+        $this->template->display('master_product/tb_master_product_excel');
+    }
+
+
+    public function excel_action() {
+         
+
+           include APPPATH.'../upload/tes.php';
+       
+
+
+
+
+
+    }
+
+
     public function create_action() {
         $this->_rules();
 

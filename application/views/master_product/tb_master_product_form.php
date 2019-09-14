@@ -17,7 +17,7 @@
             <div class='box box-primary'>
                 <div class='box-header'>
                     <div class='col-md-5'>
-                        <?php echo $message;?>
+                        <?php echo $message;?>  
                         <form action="<?php echo $action; ?>" method="post">    
                             <div class='box-body'>      
                                 <div class='form-group'>Category <?php echo form_error('category_id') ?>
