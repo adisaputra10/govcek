@@ -146,6 +146,7 @@ class Master_product extends CI_Controller {
                 'capacity' => $this->input->post('capacity', TRUE),
                 'status' => $this->input->post('status_id', TRUE),
                 'uid' => $this->session->userdata('user_id'),
+                'description' => $this->input->post('description', TRUE),
             );
             
             // cek duplikasi di master product

@@ -40,7 +40,8 @@
                                 <th>Last Insp. Date</th>
                                 <th>Exp. Date</th>
                                 <th>Caps</th>
-                                <th>Unit</th>
+                                <th>Unit</th>  
+                                 <th>Description</th> 
                                 <th>Status</th>                 
                                 <th>Actions</th>
                             </tr>
@@ -73,6 +74,8 @@
                                             <td>".$r->expire_date."</td>                            
                                             <td>".$r->capacity."</td>
                                             <td>" .$r->unit_system."</td>
+                                          
+                                            <td>" .$r->description."</td>
                                             <td>" .$r->status_name."</td>
                                             <td>". 
                                             anchor('master_product/update/' . $r->id, '<i class="btn-sm btn-info glyphicon glyphicon-edit" data-toggle="tooltip" title="Edit"></i>') . " ".
@@ -89,6 +92,8 @@
                                             <td bgcolor='#FF0000'><font color='#FFFFFF'><strong>".$r->expire_date."</strong></font></td>
                                             <td>".$r->capacity."</td>
                                             <td>".$r->unit_system."</td>
+                                      
+                                            <td>" .$r->description."</td>
                                             <td>".$r->status_name."</td>
                                             <td>". 
                                             anchor('master_product/update/' . $r->id, '<i class="btn-sm btn-info glyphicon glyphicon-edit" data-toggle="tooltip" title="Edit"></i>') . " ".

@@ -156,7 +156,16 @@
                                 <div class='form-group'>Quick Check # <?php echo form_error('quick_check_no') ?>
                                     <input type="text" class="form-control" name="quick_check_no" id="quick_check_no" placeholder="Please type quick check #" value="<?php echo $quick_check_no; ?>" />
                                 </div>
-                            </div>     
+                            </div> 
+
+
+                            <div class='box-body'>
+                                <div class='form-group'>Description  #   ?>
+                                    <input type="text" class="form-control" name="description" id="descriptions" placeholder=" " />
+                                </div>
+                            </div>   
+
+
                             <div class='form-group'>Status<?php echo form_error('status') ?>
                                 <select name="status_id" id="status_id" class="form-control" > 
                                     <option value="">- Select Status -</option>
