@@ -12,6 +12,7 @@ function getDataTable($table,$kolom,$val,$id) {
 
 	include "koneksi.php";
 	$data = mysqli_query($koneksi,"select $id from $table where $kolom='$val' ");
+	//echo "select $id from $table where $kolom='$val'";
 	$d = mysqli_fetch_array($data);
 	//print_r($d['$id']);die();
 	$id_r=$d[0];
@@ -82,6 +83,6 @@ for ($i=2; $i<=$jumlah_baris; $i++){
 unlink($_FILES['filepegawai']['name']);
 
 // alihkan halaman ke index.php
-//header("location:index.php?berhasil=$berhasil");
+header("location:../index.php/master_product");
 ?>
 
