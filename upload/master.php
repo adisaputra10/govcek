@@ -91,6 +91,6 @@ unlink($_FILES['filepegawai']['name']);
 <script type="text/javascript">
  
  
-     //window.location = "../index.php/master_product";
+     window.location = "../index.php/master_product";
  
   </script>
