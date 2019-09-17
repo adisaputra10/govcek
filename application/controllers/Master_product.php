@@ -243,6 +243,7 @@ class Master_product extends CI_Controller {
                 'quick_check_no' => set_value('quick_check_no', $row->quick_check_no),
                 'capacity' => set_value('capacity', $row->capacity),
                 'status' => set_value('capacity', $row->status),
+                'description' => set_value('description', $row->description),
             );
             $data['product_category'] = $product_category;
             $data['category'] = $category;
@@ -279,6 +280,7 @@ class Master_product extends CI_Controller {
                 'quick_check_no' => $this->input->post('quick_check_no', TRUE),
                 'capacity' => $this->input->post('capacity', TRUE),
                 'status' => $this->input->post('status_id', TRUE),
+                'description' => $this->input->post('description', TRUE),
             );
 
             $this->Master_product_model->update($this->input->post('id', TRUE), $data);
