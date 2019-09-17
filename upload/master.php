@@ -84,13 +84,13 @@ unlink($_FILES['filepegawai']['name']);
 
 // alihkan halaman ke index.php
 
-header("location:../index.php/master_product");
+ 
 ?>
 
 
 <script type="text/javascript">
  
  
-     window.location = "location:../index.php/master_product";
+     window.location = "../index.php/master_product";
  
   </script>
