@@ -65,11 +65,11 @@ for ($i=2; $i<=$jumlah_baris; $i++){
 	$id_status=getDataTable("status","status_name",$status,"id");
 	$id_inspection_schedule=getDataTable("inspection_schedule","inspection_name",$inspection_schedule,"id");
 	$uid="1";
-   
+   /*
 	echo "<br>category $category <br>product_category $product_category <br>end_user $end_user<br> manufacture $manufacture <br>serial $serial<br>";
 	echo "asset $asset <br> service_date $service_date <br> expire_date $expire_date <br>expire_date $expire_date <br>unit_system $unit_system";
 	echo "<br>inspection_schedule $inspection_schedule<br> capacity $capacity <br>quick_check $quick_check <br>status $status";
-
+*/
 	if($category != "" && $product_category != "" && $end_user != ""){
 		// input data ke database (table data_pegawai)
 		$sql="INSERT INTO `mst_product` (`id`, `category_id`, `product_category_id`, `end_user_id`, `manufacture_id`, `serial_number`, `asset_number`, `service_date`, `expire_date`, `capacity`, `unit_system_id`, `inspection_schedule_id`, `quick_check_no`, `status`, `uid`,description) VALUES (NULL, '$id_category', '$id_product_category', '$id_end_user', '$id_manufacture', '$serial', '$asset', '$service_date', '$expire_date', '$capacity', '$id_unit_system', '$id_inspection_schedule', '$quick_check', '$id_status', '$uid','$description');";
