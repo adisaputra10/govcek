@@ -161,7 +161,7 @@
 
                             <div class='box-body'>
                                 <div class='form-group'>Description  #   
-                                    <input type="text" class="form-control" name="description" id="descriptions" placeholder=" " />
+                                    <input type="text" class="form-control" name="description" id="descriptions" placeholder=" " value="<?php echo $description; ?>" />
                                 </div>
                             </div>   
 
