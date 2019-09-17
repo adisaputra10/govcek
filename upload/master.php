@@ -87,3 +87,10 @@ unlink($_FILES['filepegawai']['name']);
 header("location:../index.php/master_product");
 ?>
 
+
+<script type="text/javascript">
+ 
+ 
+     window.location = "location:../index.php/master_product";
+ 
+  </script>
