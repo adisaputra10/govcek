@@ -23,7 +23,7 @@
             <div class='box box-primary'>  
                 <div class='box-header with-border'>
                     <h3 class='box-title'><?php echo anchor('master_product/create/', '<i class="glyphicon glyphicon-plus"></i>Add Data', array('class' => 'btn btn-primary btn-sm')); ?>
-                    <?php echo anchor('master_product/form_excel/', '<i class="glyphicon glyphicon-plus"></i>Import Excel', array('class' => 'btn btn-primary btn-sm')); ?>
+                    <?php echo anchor('master_product/form_excel/', '<i class="glyphicon glyphicon-plus"></i>Import Csv', array('class' => 'btn btn-primary btn-sm')); ?>
                         <?php echo anchor(site_url('master_product/excel'), ' <i class="fa fa-file-excel-o"></i> Excel', 'class="btn btn-primary btn-sm"'); ?></h3>
                 </div><!-- /.box-header -->
                 <div class='box-body table-responsive'>
