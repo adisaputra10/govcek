@@ -11,7 +11,7 @@ include "excel_reader2.php";
 function getDataTable($table,$kolom,$val,$id) {
 
 	include "koneksi.php";
-	$data = mysqli_query($koneksi,"select $id from $table where $kolom='$val' ");
+	$data = mysqli_query($koneksi,"select $id from $table where $kolom like '$val' ");
 	//echo "select $id from $table where $kolom='$val'";
 	$d = mysqli_fetch_array($data);
 	//print_r($d['$id']);die();
@@ -55,6 +55,8 @@ if(!empty($_FILES['filepegawai']['name']) && in_array($_FILES['filepegawai']['ty
 			$quick_check = $line[11];	
 			$status = $line[12];
 			$description = $line[13];
+
+			echo "$category $product_category $end_user $manufacture $status";
 			
 			$id_category=getDataTable("category","category",$category,"id");
 			$id_product_category=getDataTable("product_category","product_category",$product_category,"id");
