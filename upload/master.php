@@ -77,7 +77,7 @@ if(!empty($_FILES['filepegawai']['name']) && in_array($_FILES['filepegawai']['ty
 			if($category != "" && $product_category != "" && $end_user != ""){
 				// input data ke database (table data_pegawai)
 				$sql="INSERT INTO `mst_product` (`id`, `category_id`, `product_category_id`, `end_user_id`, `manufacture_id`, `serial_number`, `asset_number`, `service_date`, `expire_date`, `capacity`, `unit_system_id`, `inspection_schedule_id`, `quick_check_no`, `status`, `uid`,description) VALUES (NULL, '$id_category', '$id_product_category', '$id_end_user', '$id_manufacture', '$serial', '$asset', '$service_date', '$expire_date', '$capacity', '$id_unit_system', '$id_inspection_schedule', '$quick_check', '$id_status', '$uid','$description');";
-				echo "$sql $id_unit_system $unit_system,<br> ";
+			//	echo "$sql $id_unit_system $unit_system,<br> ";
 				mysqli_query($koneksi,$sql);
 				//$berhasil++;
 			}
