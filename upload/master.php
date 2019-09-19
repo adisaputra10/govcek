@@ -48,7 +48,7 @@ if(!empty($_FILES['filepegawai']['name']) && in_array($_FILES['filepegawai']['ty
 			$serial	= $line[4];
 			$asset	= $line[5];
 			$service_date = $line[6];	
-			$expire_date = $line[7];	
+			$expire_date = $line[7];if(empty($expire_date)){ $expire_date="0000-00-00"; }	
 			$unit_system = $line[8];
 			$inspection_schedule = $line[9]	;
 			$capacity = $line[10];	
