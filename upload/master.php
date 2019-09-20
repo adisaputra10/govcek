@@ -109,6 +109,6 @@ if(!empty($_FILES['filepegawai']['name']) && in_array($_FILES['filepegawai']['ty
 <script type="text/javascript">
  
  
-    //window.location = "../index.php/master_product";
+    window.location = "../index.php/master_product";
  
   </script>

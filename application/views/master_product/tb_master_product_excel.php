@@ -23,7 +23,7 @@
                        <form action="../../upload/master.php"   method="post" enctype="multipart/form-data"> 
                      
 
-                                Pilih File Excel: 
+                                Choose File : 
                                 <input name="filepegawai" type="file" required="required"> 
                                
 
