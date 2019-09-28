@@ -160,7 +160,7 @@
 
 
                             <div class='box-body'>
-                                <div class='form-group'>Description  #   
+                                <div class='form-group'>Description  #   <?php if(empty($description)){ $description=""; }else{} ?>
                                     <input type="text" class="form-control" name="description" id="descriptions" placeholder=" " value="<?php echo $description; ?>" />
                                 </div>
                             </div>   

@@ -62,6 +62,77 @@ class Master_api extends CI_Controller {
     }
 
 
+    public function s_category() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+        $data = $this->db->query("SELECT * FROM category ");
+        echo json_encode(array('status' => true,'data' => $data->result_array() ));
+
+    }
+
+
+
+    public function s_product_category() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+        $data = $this->db->query("SELECT * FROM product_category ");
+        echo json_encode(array('status' => true,'data' => $data->result_array() ));
+
+    }
+
+
+    public function s_end_user() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+        $data = $this->db->query("SELECT * FROM end_user ");
+        echo json_encode(array('status' => true,'data' => $data->result_array() ));
+
+    }
+
+
+
+    public function s_manufacture() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+        $data = $this->db->query("SELECT * FROM manufacture ");
+        echo json_encode(array('status' => true,'data' => $data->result_array() ));
+
+    }
+
+    public function s_hp_unit() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+        $data = $this->db->query("SELECT * FROM hp_unit ");
+        echo json_encode(array('status' => true,'data' => $data->result_array() ));
+
+    }
+
+
+    public function s_schedule() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+        $data = $this->db->query("SELECT * FROM schedule ");
+        echo json_encode(array('status' => true,'data' => $data->result_array() ));
+
+    }
+
+
+    public function s_hp_status() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+        $data = $this->db->query("SELECT * FROM  hp_status ");
+        echo json_encode(array('status' => true,'data' => $data->result_array() ));
+
+    }
+    //end_user
+
     public function login()
 	{
 		
